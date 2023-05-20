@@ -1,2 +1,2 @@
-# turtle-svg
-Python code to convert SVG to Turtle draw
+# Convert SVG to Turtle draw
+
