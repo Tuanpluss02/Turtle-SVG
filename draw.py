@@ -115,22 +115,22 @@ def main_draw(svg_file, sprite_path, seg_unit=8):
 
 def cml_parse_arg():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--svg', '-s' , type=str, required=True, help='svg path')
-    parser.add_argument('--sprite', '-t', type=str, help='sprite path')
+    parser.add_argument('--svg', '-s' , type=str, help='svg path')
+    # parser.add_argument('--sprite', '-t', type=str, help='sprite path')
     return parser
 
 if __name__ == '__main__': 
     abspath = os.path.abspath(__file__)
     dirname = os.path.dirname(abspath)
 
-    #parser = cml_parse_arg()
-    #args = parser.parse_args()
-    #svg_file = args.svg
+    parser = cml_parse_arg()
+    args = parser.parse_args()
+    svg_file = args.svg
     #sprite_path = args.sprite
 
-    svg_file = 'h2.svg'
+    if svg_file is None:
+        svg_file = 'input/h1.svg'
     sprite_path = 'cursors/a{}_3.gif'
-
 
     if svg_file is not None:
         svg_file = os.path.join(dirname, svg_file)
@@ -139,4 +139,3 @@ if __name__ == '__main__':
         main_draw(svg_file, sprite_path)
     else:
         parser.print_help()# type: ignore
-
