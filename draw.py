@@ -120,6 +120,9 @@ if __name__ == '__main__':
 
     if svg_file is None:
         svg_file = 'input/h1.svg'
-
-    svg_file = os.path.join(dirname, svg_file)
-    main_draw(svg_file)
+    if svg_file is not None:
+        svg_file = os.path.join(dirname, svg_file)
+        main_draw(svg_file)
+    else:
+        print('Please input svg file path')
+        SystemExit(0)

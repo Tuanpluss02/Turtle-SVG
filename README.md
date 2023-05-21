@@ -45,8 +45,12 @@ Use this website: https://vectorizer.ai. **Do use this one, the code is meant to
 # Example
 ```
 > py draw.py -s input\h1.svg
-> py draw.py -s input\h2.svg
+> py draw.py -s input\ava.svg
 ```
 
 # Output
 ![image](https://github.com/Tuanpluss02/turtle-svg/assets/82562559/a199cf3d-bfae-4fc6-a0de-a86f7a3c011e)
+
+## License
+
+This script is licensed under the [MIT License](https://opensource.org/license/mit/).
