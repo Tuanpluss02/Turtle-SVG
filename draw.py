@@ -28,22 +28,14 @@ def read_svg(path, seg_unit):
         polys.append([[(p.real, p.imag) for p in pl] for pl in poly])
     return (polys, attrs, svg_size, viewbox)
 
-def change_shape(t, h):
-    i = int(round((h+90)/45)%8)
-    t.shape(sprite_path.format(i))
-
 def head_to(t, x, y, draw=True, have_sprite=True):
     wasdown = t.isdown()
     heading = t.towards(x,y)
     t.pen(pendown=draw)
     t.seth(heading)
-    if have_sprite:
-        t.clearstamps()
-        change_shape(t, heading)
-        t.goto(x,y)
-        t.stamp()
-    else:
-        t.goto(x,y)
+    t.clearstamps()
+    t.goto(x,y)
+    t.stamp()
     t.pen(pendown=wasdown)
 
 def draw_polygon(t, poly, fill='black', stroke='black', have_sprite=True):
@@ -68,7 +60,7 @@ def draw_multipolygon(t, mpoly, fill='black', stroke='black', have_sprite=True):
     if fill!='none':
         t.end_fill()
 
-def main_draw(svg_file, sprite_path, seg_unit=8):
+def main_draw(svg_file, seg_unit=8):
     polys, attrs, svg_size, viewbox = read_svg(svg_file, seg_unit=seg_unit)
     svg_w, svg_h = (viewbox[2]-viewbox[0], viewbox[3]-viewbox[1])
     svg_m = min(svg_w, svg_h)
@@ -83,15 +75,11 @@ def main_draw(svg_file, sprite_path, seg_unit=8):
     scale = win_m / svg_m
 
     t.reset()
+    t.pencolor('black')
     t.speed(50)
     t.setworldcoordinates(viewbox[0]*1.1, -viewbox[3]*1.1, viewbox[2]*1.1, -viewbox[1]*1.1)
     t.mode(mode='world')
     t.tracer(n=10, delay=0)
-    have_sprite = sprite_path is not None
-    if have_sprite:
-        for i in range(8):
-            for f in [2, 3]:
-                t.register_shape(sprite_path.format(i,f))
 
     for poly, attr in zip(polys, attrs): # type: ignore
         if 'style' in attr.keys():
@@ -104,14 +92,12 @@ def main_draw(svg_file, sprite_path, seg_unit=8):
             t.pen(outline=float(attr['stroke-width'])*scale) # type: ignore
 
         if 'fill' in attr.keys():
-            draw_multipolygon(t, poly, fill=attr['fill'], stroke=attr['stroke'], have_sprite=have_sprite)
+            draw_multipolygon(t, poly, fill=attr['fill'], stroke=attr['stroke'])
         
 
     t.tracer(n=1, delay=0)
-    head_to(t,viewbox[2],-viewbox[3], False, have_sprite)
-    if have_sprite:
-        t.clearstamps()
-        change_shape(t, 0)
+    head_to(t,viewbox[2],-viewbox[3], False)
+    t.clearstamps()
     # t.penup() 
     # t.goto(0, -70)  
     # t.write("Made by StormX", align="center", font=("Arial", 12, "normal"))
@@ -123,7 +109,6 @@ def main_draw(svg_file, sprite_path, seg_unit=8):
 def cml_parse_arg():
     parser = argparse.ArgumentParser()
     parser.add_argument('--svg', '-s' , type=str, help='svg path')
-    # parser.add_argument('--sprite', '-t', type=str, help='sprite path')
     return parser
 
 if __name__ == '__main__': 
@@ -133,13 +118,9 @@ if __name__ == '__main__':
     parser = cml_parse_arg()
     args = parser.parse_args()
     svg_file = args.svg
-    #sprite_path = args.sprite
 
     if svg_file is None:
         svg_file = 'input/h1.svg'
-    sprite_path = 'cursors/a{}_3.gif'
 
     svg_file = os.path.join(dirname, svg_file)
-    if sprite_path is not None:
-        sprite_path = os.path.join(dirname, sprite_path)
-    main_draw(svg_file, sprite_path)
+    main_draw(svg_file)
