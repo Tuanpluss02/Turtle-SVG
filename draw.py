@@ -1,6 +1,4 @@
-import io
 import os
-import sys
 import argparse
 import turtle as t
 from math import ceil

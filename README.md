@@ -48,4 +48,4 @@ Use this website: https://vectorizer.ai. **Do use this one, the code is meant to
 > py draw.py -s input\h2.svg
 ```
 
-
+# Output
