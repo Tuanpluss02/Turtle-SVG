@@ -49,3 +49,4 @@ Use this website: https://vectorizer.ai. **Do use this one, the code is meant to
 ```
 
 # Output
+![image](https://github.com/Tuanpluss02/turtle-svg/assets/82562559/a199cf3d-bfae-4fc6-a0de-a86f7a3c011e)
