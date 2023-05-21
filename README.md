@@ -36,9 +36,16 @@ The script reads an SVG file and extracts the path data from it. It then convert
 
 # Usage
 1. To vectorize an image as an SVG file
-Use this website: https://vectorizer.ai. **Do use this one; the code is meant to run with the SVG spec associated with this tool specifically**.
+Use this website: https://vectorizer.ai. **Do use this one, the code is meant to run with the SVG spec associated with this tool specifically**.
 2. To convert an SVG file to Turtle draw commands
 ```
-> py draw.py <svg_file> <output_file>
+> py draw.py -s <svg_file> 
 ```
+
+# Example
+```
+> py draw.py -s input\h1.svg
+> py draw.py -s input\h2.svg
+```
+
 

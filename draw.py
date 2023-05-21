@@ -42,6 +42,7 @@ def draw_polygon(t, poly, fill='black', stroke='black', have_sprite=True):
     if fill=='none':
         fill = 'black'
     t.color(stroke,fill)
+    t.pencolor('black')
     p = poly[0]
     head_to(t,p[0],-(p[1]), False, have_sprite)
     for p in poly[1:]: 
@@ -61,6 +62,7 @@ def draw_multipolygon(t, mpoly, fill='black', stroke='black', have_sprite=True):
         t.end_fill()
 
 def main_draw(svg_file, seg_unit=8):
+    t.pencolor('black')
     polys, attrs, svg_size, viewbox = read_svg(svg_file, seg_unit=seg_unit)
     svg_w, svg_h = (viewbox[2]-viewbox[0], viewbox[3]-viewbox[1])
     svg_m = min(svg_w, svg_h)
@@ -75,7 +77,6 @@ def main_draw(svg_file, seg_unit=8):
     scale = win_m / svg_m
 
     t.reset()
-    t.pencolor('black')
     t.speed(50)
     t.setworldcoordinates(viewbox[0]*1.1, -viewbox[3]*1.1, viewbox[2]*1.1, -viewbox[1]*1.1)
     t.mode(mode='world')
@@ -89,7 +90,7 @@ def main_draw(svg_file, seg_unit=8):
 
         t.pen(outline=0.5*scale) # type: ignore
         if 'stroke-width' in attr.keys():
-            t.pen(outline=float(attr['stroke-width'])*scale) # type: ignore
+            t.pen(outline=float(attr['stroke-width'])*scale, pencolor= 'black') # type: ignore
 
         if 'fill' in attr.keys():
             draw_multipolygon(t, poly, fill=attr['fill'], stroke=attr['stroke'])
