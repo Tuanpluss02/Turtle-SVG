@@ -1,3 +1,4 @@
+import io
 import os
 import sys
 import argparse
@@ -111,7 +112,13 @@ def main_draw(svg_file, sprite_path, seg_unit=8):
     if have_sprite:
         t.clearstamps()
         change_shape(t, 0)
+    # t.penup() 
+    # t.goto(0, -70)  
+    # t.write("Made by StormX", align="center", font=("Arial", 12, "normal"))
     t.done()
+
+
+
 
 def cml_parse_arg():
     parser = argparse.ArgumentParser()
@@ -132,10 +139,7 @@ if __name__ == '__main__':
         svg_file = 'input/h1.svg'
     sprite_path = 'cursors/a{}_3.gif'
 
-    if svg_file is not None:
-        svg_file = os.path.join(dirname, svg_file)
-        if sprite_path is not None:
-            sprite_path = os.path.join(dirname, sprite_path)
-        main_draw(svg_file, sprite_path)
-    else:
-        parser.print_help()# type: ignore
+    svg_file = os.path.join(dirname, svg_file)
+    if sprite_path is not None:
+        sprite_path = os.path.join(dirname, sprite_path)
+    main_draw(svg_file, sprite_path)
