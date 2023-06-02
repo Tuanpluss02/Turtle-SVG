@@ -40,7 +40,6 @@ def draw_polygon(t, poly, fill='black', stroke='black', have_sprite=True):
     if fill=='none':
         fill = 'black'
     t.color(stroke,fill)
-    t.pencolor('black')
     p = poly[0]
     head_to(t,p[0],-(p[1]), False, have_sprite)
     for p in poly[1:]: 
@@ -60,7 +59,6 @@ def draw_multipolygon(t, mpoly, fill='black', stroke='black', have_sprite=True):
         t.end_fill()
 
 def main_draw(svg_file, seg_unit=8):
-    t.pencolor('black')
     polys, attrs, svg_size, viewbox = read_svg(svg_file, seg_unit=seg_unit)
     svg_w, svg_h = (viewbox[2]-viewbox[0], viewbox[3]-viewbox[1])
     svg_m = min(svg_w, svg_h)
@@ -75,7 +73,7 @@ def main_draw(svg_file, seg_unit=8):
     scale = win_m / svg_m
 
     t.reset()
-    t.speed(50)
+    t.speed(0)
     t.setworldcoordinates(viewbox[0]*1.1, -viewbox[3]*1.1, viewbox[2]*1.1, -viewbox[1]*1.1)
     t.mode(mode='world')
     t.tracer(n=10, delay=0)
@@ -126,3 +124,4 @@ if __name__ == '__main__':
     else:
         print('Please input svg file path')
         SystemExit(0)
+
