@@ -95,9 +95,6 @@ def main_draw(svg_file, seg_unit=8):
     t.tracer(n=1, delay=0)
     head_to(t,viewbox[2],-viewbox[3], False)
     t.clearstamps()
-    # t.penup() 
-    # t.goto(0, -70)  
-    # t.write("Made by StormX", align="center", font=("Arial", 12, "normal"))
     t.done()
 
 
