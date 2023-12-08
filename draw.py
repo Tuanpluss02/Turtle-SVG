@@ -8,8 +8,8 @@ import numpy as np
 
 def read_svg(path, seg_unit):
     paths, attrs, svg_attr = svg2paths2(path) # type: ignore
-    svg_size = (int(svg_attr['width'].replace('px','')), 
-                int(svg_attr['height'].replace('px','')) )
+    svg_size = (int(float(svg_attr['width'].replace('px',''))), 
+                int(float(svg_attr['height'].replace('px',''))) )
     viewbox = [float(f) for f in svg_attr['viewBox'].split(' ')]
 
     polys = []
