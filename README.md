@@ -18,10 +18,10 @@ The script reads an SVG file and extracts the path data from it. It then convert
 
 ```
 1. Clone the repository:
-> git clone https://github.com/Tuanpluss02/turtle-svg.git
+> git clone https://github.com/Tuanpluss02/Turtle-SVG.git
 
 2. Change into the project directory:
-> cd turtle-svg
+> cd Turtle-SVG
 
 3. Create a virtual environment:
 > py -m venv venv
